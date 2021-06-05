@@ -23,6 +23,22 @@ type Formatting struct {
 	ColoredTitle bool `default:"false"`
 }
 
+// Authentication holds the settings for the oauth server
+type Authentication struct {
+	Method string `default:"basic"`
+	Oauth  Oauth
+}
+
+// Oauth holds information about the oauth server
+type Oauth struct {
+	Connection     string `default:"pushbits_token.db"`
+	Storage        string `default:"file"`
+	ClientID       string `default:"000000"`
+	ClientSecret   string `default:""`
+	ClientRedirect string `default:"http://localhost"`
+	TokenKey       string `default:""`
+}
+
 // Configuration holds values that can be configured by the user.
 type Configuration struct {
 	Debug bool `default:"false"`
@@ -47,8 +63,9 @@ type Configuration struct {
 	Security struct {
 		CheckHIBP bool `default:"false"`
 	}
-	Crypto     CryptoConfig
-	Formatting Formatting
+	Crypto         CryptoConfig
+	Formatting     Formatting
+	Authentication Authentication
 }
 
 func configFiles() []string {
